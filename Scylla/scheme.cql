@@ -7,6 +7,7 @@ CREATE TABLE users (
 	registration_date int,
 	last_connection int,
 	cek text,
+	pks set,
 	double_auth boolean,
 	auth_code text,
 	PRIMARY KEY (user_id)
@@ -94,3 +95,9 @@ CREATE TABLE comments (
 	ct text,
 	PRIMARY KEY ((file_id, user_id, added_date), added_date)
 ) WITH CLUSTERING ORDER BY (added_date DESC)
+
+CREATE TABLE shared_with_me (
+	file_id uuid,
+	user_id uuid,
+	PRIMARY KEY ((file_id, user_id), file_id)
+) WITH CLUSTERING ORDER BY (file_id)
