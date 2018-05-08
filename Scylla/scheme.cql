@@ -22,7 +22,6 @@ CREATE TABLE files (
 	last_modification int,
 	favorite boolean,
 	trash boolean,
-	shared boolean,
 	expires int,
 	dk text,
 	lek map,
