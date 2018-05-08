@@ -100,4 +100,4 @@ CREATE TABLE shared_with_me (
 	file_id uuid,
 	user_id uuid,
 	PRIMARY KEY ((file_id, user_id), file_id)
-) WITH CLUSTERING ORDER BY (file_id)
+) WITH CLUSTERING ORDER BY (file_id DESC)
