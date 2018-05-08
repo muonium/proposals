@@ -24,7 +24,7 @@ CREATE TABLE files (
 	expires int,
 	dk text,
 	PRIMARY KEY ((file_id, id_owner, folder_id), last_modification)
-) WITH CLUSTERING (last_modification DESC)
+) WITH CLUSTERING ORDER BY (last_modification DESC)
 
 CREATE TABLE folders (
 	folder_id uuid,
@@ -35,7 +35,7 @@ CREATE TABLE folders (
 	trash boolean,
 	path text,
 	PRIMARY KEY ((folder_id, id_owner), folder_id)
-) WITH CLUSTERING (folder_id DESC)
+) WITH CLUSTERING ORDER BY (folder_id DESC)
 
 CREATE TABLE storage (
 	user_id uuid,
@@ -90,4 +90,4 @@ CREATE TABLE comments (
 	added_date timestamp,
 	ct text,
 	PRIMARY KEY ((file_id, user_id, added_date), added_date)
-) WITH CLUSTERING (added_date DESC)
+) WITH CLUSTERING ORDER BY (added_date DESC)
