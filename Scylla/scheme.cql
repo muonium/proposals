@@ -38,11 +38,10 @@ CREATE TABLE folders (
 ) WITH CLUSTERING (folder_id DESC)
 
 CREATE TABLE storage (
-	id bigint,
 	user_id bigint,
 	user_quota bigint,
 	size_stored bigint,
-	PRIMARY KEY (id, user_id)
+	PRIMARY KEY (user_id)
 )
 
 CREATE TABLE storage_plans (
