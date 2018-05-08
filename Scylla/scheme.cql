@@ -23,6 +23,7 @@ CREATE TABLE files (
 	trash boolean,
 	expires int,
 	dk text,
+	lek map,
 	PRIMARY KEY ((file_id, id_owner, folder_id), last_modification)
 ) WITH CLUSTERING ORDER BY (last_modification DESC)
 
