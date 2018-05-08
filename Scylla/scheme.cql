@@ -55,6 +55,8 @@ CREATE TABLE storage_plans (
 	PRIMARY KEY (id)
 )
 
+-- we need to remove the rows, not making it explicit with "removed"
+
 CREATE TABLE upgrade (
 	id_user bigint,
 	txn_id text,
@@ -63,7 +65,7 @@ CREATE TABLE upgrade (
 	currency text,
 	start text,
 	end text,
-	removed boolean, // ==> WTF we need to remove the rows, not making it explicit
+	removed boolean,
 	most_popular boolean,
 	PRIMARY KEY (id_user)
 )
@@ -71,7 +73,7 @@ CREATE TABLE upgrade (
 CREATE TABLE user_lostpass (
 	id_user bigint,
 	val_key text,
-	expire int, // ==> not text as it's a date?
+	expire int,
 	PRIMARY KEY (id_user)
 )
 
