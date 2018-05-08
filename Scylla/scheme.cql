@@ -1,5 +1,5 @@
 CREATE TABLE users (
-	user_id bigint,
+	user_id uuid,
 	login text,
 	password text,
 	email text,
@@ -13,9 +13,9 @@ CREATE TABLE users (
 )
 
 CREATE TABLE files (
-	file_id bigint,
-	id_owner bigint,
-	folder_id bigint,
+	file_id uuid,
+	id_owner uuid,
+	folder_id uuid,
 	name text,
 	size bigint,
 	last_modification int,
@@ -27,8 +27,8 @@ CREATE TABLE files (
 ) WITH CLUSTERING (last_modification DESC)
 
 CREATE TABLE folders (
-	folder_id bigint,
-	id_owner bigint,
+	folder_id uuid,
+	id_owner uuid,
 	name text,
 	size bigint,
 	parent bigint,
@@ -38,14 +38,14 @@ CREATE TABLE folders (
 ) WITH CLUSTERING (folder_id DESC)
 
 CREATE TABLE storage (
-	user_id bigint,
+	user_id uuid,
 	user_quota bigint,
 	size_stored bigint,
 	PRIMARY KEY (user_id)
 )
 
 CREATE TABLE storage_plans (
-	id int,
+	id uuid,
 	size bigint,
 	price float,
 	currency text,
@@ -57,7 +57,7 @@ CREATE TABLE storage_plans (
 -- we need to remove the rows, not making it explicit with "removed"
 
 CREATE TABLE upgrade (
-	id_user bigint,
+	id_user uuid,
 	txn_id text,
 	size bigint,
 	price float,
@@ -70,14 +70,14 @@ CREATE TABLE upgrade (
 )
 
 CREATE TABLE user_lostpass (
-	id_user bigint,
+	id_user uuid,
 	val_key text,
 	expire int,
 	PRIMARY KEY (id_user)
 )
 
 CREATE TABLE user_validation (
-	id_user bigint,
+	id_user uuid,
 	val_key text,
 	PRIMARY KEY (id_user)
 )
@@ -85,8 +85,8 @@ CREATE TABLE user_validation (
 -- ct means content
 
 CREATE TABLE comments (
-	file_id bigint,
-	user_id bigint,
+	file_id uuid,
+	user_id uuid,
 	added_date timestamp,
 	ct text,
 	PRIMARY KEY ((file_id, user_id, added_date), added_date)
