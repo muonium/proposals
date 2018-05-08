@@ -8,7 +8,7 @@ CREATE TABLE users (
 	last_connection int,
 	cek text,
 	double_auth boolean,
-	auth_code text
+	auth_code text,
 	PRIMARY KEY (user_id)
 )
 
