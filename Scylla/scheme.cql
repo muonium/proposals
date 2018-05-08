@@ -100,3 +100,9 @@ CREATE TABLE shared_with_me (
 	user_id uuid,
 	PRIMARY KEY ((file_id, user_id), file_id)
 ) WITH CLUSTERING ORDER BY (file_id DESC)
+
+CREATE TABLE contacts (
+	user_id uuid,
+	contact_id uuid,
+	PRIMARY KEY ((user_id, contact_id), (user_id)
+) WITH CLUSTERING ORDER BY (user_id DESC)
