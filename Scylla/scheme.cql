@@ -82,7 +82,7 @@ CREATE TABLE user_validation (
 	PRIMARY KEY (id_user)
 )
 
-// ct means content
+-- ct means content
 
 CREATE TABLE comments (
 	file_id bigint,
