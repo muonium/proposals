@@ -63,7 +63,7 @@ CREATE TABLE upgrade (
 	currency text,
 	start text,
 	end text,
-	removed boolean, ==> WTF we need to remove the rows, not making it explicit
+	removed boolean, // ==> WTF we need to remove the rows, not making it explicit
 	most_popular boolean,
 	PRIMARY KEY (id_user)
 )
@@ -71,7 +71,7 @@ CREATE TABLE upgrade (
 CREATE TABLE user_lostpass (
 	id_user bigint,
 	val_key text,
-	expire int, ==> not text as it's a date?
+	expire int, // ==> not text as it's a date?
 	PRIMARY KEY (id_user)
 )
 
