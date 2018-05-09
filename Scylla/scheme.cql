@@ -1,108 +1,110 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
 	user_id uuid,
 	login text,
 	password text,
 	email text,
 	lang text,
-	registration_date int,
-	last_connection int,
+	registration_date timestamp,
+	last_connection timestamp,
 	cek text,
-	pks set,
+	pks tuple<text, text>,
 	double_auth boolean,
 	auth_code text,
 	PRIMARY KEY (user_id)
-)
+);
 
-CREATE TABLE files (
+CREATE TABLE IF NOT EXISTS files (
 	file_id uuid,
-	id_owner uuid,
+	owner_id uuid,
+	owner_login text,
 	folder_id uuid,
+	updated_at timestamp,
 	name text,
 	size bigint,
-	last_modification int,
 	favorite boolean,
 	trash boolean,
-	expires int,
+	expires timestamp,
+	path text,
 	dk text,
-	lek map,
-	dk_asym map,
-	PRIMARY KEY ((file_id, id_owner, folder_id), last_modification)
-) WITH CLUSTERING ORDER BY (last_modification DESC)
+	lek map<uuid, text>,
+	dk_asym map<uuid, text>,
+	PRIMARY KEY ((file_id, owner_id), updated_at)
+) WITH CLUSTERING ORDER BY (updated_at DESC);
 
-CREATE TABLE folders (
+CREATE TABLE IF NOT EXISTS folders (
 	folder_id uuid,
-	id_owner uuid,
+	owner_id uuid,
+	parent uuid,
+	updated_at timestamp,
 	name text,
 	size bigint,
-	parent bigint,
+	favorite boolean,
 	trash boolean,
 	path text,
-	PRIMARY KEY ((folder_id, id_owner), folder_id)
-) WITH CLUSTERING ORDER BY (folder_id DESC)
+	PRIMARY KEY (folder_id, owner_id)
+);
 
-CREATE TABLE storage (
+CREATE TABLE IF NOT EXISTS storage (
 	user_id uuid,
 	user_quota bigint,
 	size_stored bigint,
 	PRIMARY KEY (user_id)
-)
+);
 
-CREATE TABLE storage_plans (
-	id uuid,
+CREATE TABLE IF NOT EXISTS storage_plans (
+	product_id text,
 	size bigint,
 	price float,
 	currency text,
 	duration int,
-	product_id text,
-	PRIMARY KEY (id)
-)
+	most_popular boolean,
+	PRIMARY KEY (product_id)
+);
 
--- we need to remove the rows, not making it explicit with "removed"
-
-CREATE TABLE upgrade (
-	id_user uuid,
+CREATE TABLE IF NOT EXISTS upgrade (
+	user_id uuid,
 	txn_id text,
 	size bigint,
 	price float,
 	currency text,
-	start text,
-	end text,
+	start timestamp,
+	end timestamp,
 	removed boolean,
-	most_popular boolean,
-	PRIMARY KEY (id_user)
-)
+	PRIMARY KEY (user_id)
+);
 
-CREATE TABLE user_lostpass (
-	id_user uuid,
+CREATE TABLE IF NOT EXISTS user_lostpass (
+	user_id uuid,
 	val_key text,
-	expire int,
-	PRIMARY KEY (id_user)
-)
+	expire timestamp,
+	PRIMARY KEY (user_id)
+);
 
-CREATE TABLE user_validation (
-	id_user uuid,
+CREATE TABLE IF NOT EXISTS user_validation (
+	user_id uuid,
 	val_key text,
-	PRIMARY KEY (id_user)
-)
+	PRIMARY KEY (user_id)
+);
 
 -- ct means content
 
-CREATE TABLE comments (
+CREATE TABLE IF NOT EXISTS comments (
+	comment_id uuid,
 	file_id uuid,
 	user_id uuid,
 	added_date timestamp,
 	ct text,
-	PRIMARY KEY ((file_id, user_id, added_date), added_date)
-) WITH CLUSTERING ORDER BY (added_date DESC)
+	PRIMARY KEY ((comment_id), added_date, file_id)
+) WITH CLUSTERING ORDER BY (added_date DESC);
 
-CREATE TABLE shared_with_me (
+CREATE TABLE IF NOT EXISTS shared_with (
 	file_id uuid,
-	user_id uuid,
-	PRIMARY KEY ((file_id, user_id), file_id)
-) WITH CLUSTERING ORDER BY (file_id DESC)
+	users list<uuid>,
+	PRIMARY KEY (file_id)
+);
 
-CREATE TABLE contacts (
+CREATE TABLE IF NOT EXISTS contacts (
 	user_id uuid,
-	contact_id uuid,
-	PRIMARY KEY ((user_id, contact_id), (user_id)
-) WITH CLUSTERING ORDER BY (user_id DESC)
+	contacts list<uuid>,
+	PRIMARY KEY (user_id)
+);
