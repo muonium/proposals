@@ -99,12 +99,12 @@ CREATE TABLE IF NOT EXISTS comments (
 
 CREATE TABLE IF NOT EXISTS shared_with (
 	file_id uuid,
-	users list<uuid>,
+	users set<uuid>,
 	PRIMARY KEY (file_id)
 );
 
 CREATE TABLE IF NOT EXISTS contacts (
 	user_id uuid,
-	contacts list<uuid>,
+	contacts set<uuid>,
 	PRIMARY KEY (user_id)
 );
