@@ -108,3 +108,21 @@ CREATE TABLE IF NOT EXISTS contacts (
 	contacts set<uuid>,
 	PRIMARY KEY (user_id)
 );
+
+CREATE TABLE IF NOT EXISTS organizations (
+	org_id uuid,
+	name text,
+	nb_users bigint,
+	cek text,
+	PRIMARY KEY (org_id)
+);
+
+
+--table for non-private sub-users'
+--keys
+CREATE TABLE IF NOT EXISTS org_keys (
+	user_id uuid,
+	cek text,
+	pks tuple<text, text>,
+	PRIMARY KEY (user_id)
+);
