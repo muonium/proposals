@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
 	last_connection timestamp,
 	cek text,
 	pks tuple<text, text>,
-	double_auth boolean,
+	double_auth tinyint,
 	auth_code text,
 	PRIMARY KEY (user_id)
 );
