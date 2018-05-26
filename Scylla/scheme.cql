@@ -8,6 +8,7 @@ CREATE TABLE user_by_id (
 	last_connection date,
 	cek text,
 	pks tuple<text, text>,
+	pkb_fingerprint text,
 	double_auth tinyint,
 	auth_code text,
 	PRIMARY KEY (user_id)
