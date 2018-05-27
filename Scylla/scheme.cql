@@ -11,6 +11,7 @@ CREATE TABLE user_by_id (
 	pkb_fingerprint text,
 	double_auth tinyint,
 	auth_code text,
+	ga_salt text,
 	PRIMARY KEY (user_id)
 );
 CREATE INDEX ON user_by_id (last_connection);
