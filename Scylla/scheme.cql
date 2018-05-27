@@ -155,7 +155,7 @@ CREATE TABLE shared_with (
 
 CREATE TABLE contacts (
 	user_id uuid,
-	contacts set<uuid>,
+	contacts map<uuid, text>,
 	PRIMARY KEY (user_id)
 );
 
