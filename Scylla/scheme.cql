@@ -12,6 +12,7 @@ CREATE TABLE user_by_id (
 	double_auth tinyint,
 	auth_code text,
 	ga_salt text,
+	ga_codes set<text>,
 	PRIMARY KEY (user_id)
 );
 CREATE INDEX ON user_by_id (last_connection);
