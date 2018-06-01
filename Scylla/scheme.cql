@@ -46,7 +46,6 @@ CREATE TABLE files (
 	dk text,
 	lek map<uuid, text>,
 	dk_asym map<uuid, text>,
-	shared boolean,
 	PRIMARY KEY (file_id, owner_id)
 );
 CREATE INDEX ON files (folder_id);
